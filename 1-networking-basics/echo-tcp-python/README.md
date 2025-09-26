@@ -32,10 +32,17 @@ python src/server.py
 ```
 **Test with Client**
 ```bash
-curl localhost
+python src/client.py
 ```
 
 ## 📖 Notes & Reflections
 What went well?
+- Easy implementation
+- Fun to learn the low-level things
 What was challenging?
+- Understanding some of the lingo for low-level constants (e.g. 'AF_INET')
 What you’d improve if you revisited this?
+- Add error handling
+
+## Workflows
+![CI](https://github.com/RJSkywalker91/senior-backend-prep/actions/workflows/echo-tcp-python.yml/badge.svg)
