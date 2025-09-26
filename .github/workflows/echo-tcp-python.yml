@@ -1,0 +1,35 @@
+name: Echo TCP (Python)
+
+on:
+  pull_request:
+    branches: [ main ]
+    # Only run if this project (or this workflow file) changed
+    paths:
+      - '1-networking-basics/echo-tcp-python/**'
+      - '.github/workflows/echo-tcp-python.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # Get the code
+      - uses: actions/checkout@v4
+
+      # Choose Python version (adjust if needed)
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Install deps (skip if you don't use a reqs file)
+      - name: Install dependencies
+        working-directory: 1-networking-basics/echo-tcp-python
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          # If you use pytest:
+          pip install pytest || true
+
+      # Run tests (or run a simple smoke script)
+      - name: Run tests
+        working-directory: 1-networking-basics/echo-tcp-python
+        run: |
+          if [ -d tests ]; then pytest -q; else echo "No tests yet"; fi
