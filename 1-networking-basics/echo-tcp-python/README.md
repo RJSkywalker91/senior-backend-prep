@@ -9,8 +9,8 @@ Why did I build it?
 ---
 
 ## 🎯 Learning Goals
-- [ ] Create a server in python
-- [ ] Utilize TCP libraries
+- [x] Create a server in python
+- [x] Utilize TCP libraries
 
 ---
 
