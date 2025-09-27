@@ -24,8 +24,8 @@ A short description of the project:
 ## 🚀 How to Run
 **Clone the repo:**
 ```bash
-git clone https://github.com/RJSkywalker91/backend-journey.git
-cd backend-journey/networking/echo-tcp-python
+git clone https://github.com/RJSkywalker91/senior-backend-prep.git
+cd directory/project/file
 ```
 **Run the Server**
 ```bash

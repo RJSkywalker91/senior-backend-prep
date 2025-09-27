@@ -23,8 +23,8 @@ Why did I build it?
 ## 🚀 How to Run
 **Clone the repo:**
 ```bash
-git clone https://github.com/RJSkywalker91/backend-journey.git
-cd backend-journey/networking/echo-tcp-csharp/src
+git clone https://github.com/RJSkywalker91/senior-backend-prep.git
+cd 1-networking-basics/echo-tcp-csharp/src
 ```
 **Run the Server**
 ```bash
