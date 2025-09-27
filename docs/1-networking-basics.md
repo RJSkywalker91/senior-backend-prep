@@ -1,8 +1,16 @@
 # Networking Basics Notes
 
 ## echo-tcp
+
+### Simple Diagram
+```mermaid
+flowchart TD;
+  A[Server]-->B[Client];
+  B-->A;
+```
+
 ### Starting Thoughts
-- I have worked with plenty of server concepts in C#, but not a low level (sockets), connection-based server where I am the one writing the logic for connections.
+- I have worked with plenty of API/web app concepts in C#, but not a low level (sockets), connection-based server where I am the one writing the logic for connections.
 - I will create a simple "echo" tcp server in 4 languages: Python, C#, JS, and GO
 - I do have quite a bit of experience in Python, C#, and JS. I am confident these three will be very easy to implement in a small amount of time.
 - Starting out with the easiest possible implementation. There will not be a lot of error checking, try/catch, etc. 
@@ -16,9 +24,15 @@
 - C# socket library was much easier to read EXCEPT for Bind(). It was a little difficult to understand the concept of IPEndpoint without looking it up.
 - Encoding was a bit trickier
 
-### JS Thoughts
-
 ### GO Thoughts
+- While the newest language for me, it felt the most simple and straightforward
+- Not sure what the normal conventions are for error checking and helper functions
+- Need to look into Goroutines (threading)
+
 
 ### Final Thoughts
-- 
+- Python was probably the easiest to create, but GO felt more powerful with the low-level functionality
+- I think I will continue making projects in GO for the time being. I may come back at some point and do all projects in all 3 languages.
+
+
+## 
