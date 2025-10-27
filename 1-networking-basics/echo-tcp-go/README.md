@@ -1,22 +1,22 @@
-# TCP Echo Server in Python
+# TCP Echo Server in Go
 
 ## 📌 Overview
 What is it?
 - A simple TCP echo server that accepts client connections and sends back messages.
 Why did I build it?
-- Exploring the basics again after almost 10 years
+- Pushing my boundaries by building something relatively easy with a new programming language.
 
 ---
 
 ## 🎯 Learning Goals
-- [x] Create a server in python
+- [x] Create a server in golang
 - [x] Utilize TCP libraries
 
 ---
 
 ## 🛠️ Tech Stack
-- Language: Python
-- Libraries/Frameworks: asyncio
+- Language: Go
+- Libraries/Frameworks: "net"
 
 ---
 
@@ -24,25 +24,25 @@ Why did I build it?
 **Clone the repo:**
 ```bash
 git clone https://github.com/RJSkywalker91/senior-backend-prep.git
-cd 1-networking-basics/echo-tcp-python/src
+cd 1-networking-basics/echo-tcp-go/src
 ```
 **Run the Server**
 ```bash
-python server.py
+go run server/server.go
 ```
 **Test with Client**
 ```bash
-python client.py
+go run client/client.go
 ```
 
 ## 📖 Notes & Reflections
 What went well?
-- Easy implementation
-- Fun to learn the low-level things
+- Intuitive socket library
+- Not a hard language to pick up
 What was challenging?
-- Understanding some of the lingo for low-level constants (e.g. 'AF_INET')
+- Not certain what the normal go "conventions" are for programming. Lots to learn still.
 What you’d improve if you revisited this?
-- Add error handling
+- N/A
 
 ## Workflows
-![CI](https://github.com/RJSkywalker91/senior-backend-prep/actions/workflows/echo-tcp-python.yml/badge.svg)
+- TBD

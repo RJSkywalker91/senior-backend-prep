@@ -1,0 +1,66 @@
+# Build results
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio / VS Code
+.vscode/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# NuGet
+*.nupkg
+*.snupkg
+*.nuspec
+*.psmdcp
+*.package
+*.lock.json
+# Uncomment if you don't want to commit packages folder (older NuGet)
+# packages/
+
+# Dotnet tools
+*.dotnet-tools.json
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+
+# Publish artifacts
+publish/
+out/
+artifacts/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.svclog
+*.pidb
+*.userprefs
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Resharper
+_ReSharper*/
+*.ReSharper
+*.DotSettings.user
+
+# Other
+*.dbmdl
+*.bak
+*.bak2
+*.orig
+*.swp
+*.sln.iml

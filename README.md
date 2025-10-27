@@ -15,7 +15,7 @@ This repo serves as both a **portfolio** and a **learning log**, showcasing prac
 This repository is organized by topic, following a 6-month transition plan:
 
 1. **Networking Basics**
-   - TCP/UDP echo servers (Python & C#)
+   - TCP/UDP echo servers (Python, C#, GO)
    - Asynchronous socket chat server
    - Notes on TCP vs UDP tradeoffs
 2. **Backend Foundations**
