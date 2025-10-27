@@ -35,4 +35,20 @@ flowchart TD;
 - I think I will continue making projects in GO for the time being. I may come back at some point and do all projects in all 3 languages.
 
 
-## 
+## Simple UDP Chat Service
+```mermaid
+flowchart TD;
+  A[Server]-->B[Client];
+  B-->A;
+  A-->C[Client2];
+  C-->A;
+```
+
+### Starting Thoughts
+- How can I use goroutines for this?
+- How do I send messages across goroutines?
+- Serialization (marshalling) of data is not something I have really done before other than using DTOs for APIs. This goes a level deeper to actually put that data into bytes
+
+### Final Thoughts
+- It was both easier and harder to understand marshalling. Once I was able to wrap my head around HOW to do marshalling and unmarshalling, implementing it in the server and client files was relatively easy.
+- I think using protocols will probably be an easier route, but I have not compared them yet
