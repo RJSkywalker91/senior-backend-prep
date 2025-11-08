@@ -6,8 +6,10 @@ import (
 	"fmt"
 	"log"
 	pb "matchmaking/cmd/proto"
+	"matchmaking/internal/auth"
 	"matchmaking/internal/config"
 	"matchmaking/internal/player"
+	"matchmaking/internal/queue"
 	"matchmaking/internal/storage/postgres"
 	"net"
 	"os"
@@ -43,6 +45,11 @@ func main() {
 	}
 
 	// Set up layers with dependency injection
+	qm := queue.NewQueueManager()
+	qm.Start(context.Background())
+
+	verifier := auth.NewVerifier([]byte(cfg.JWTSecret))
+
 	s := grpc.NewServer(
 		grpc.KeepaliveParams(keepalive.ServerParameters{
 			MaxConnectionIdle: 60 * time.Second,
@@ -51,9 +58,11 @@ func main() {
 			Timeout:           10 * time.Second, // ping timeout
 		}),
 		grpc.ConnectionTimeout(10*time.Second), // handshake timeout
+		grpc.StreamInterceptor(verifier.Stream()),
 	)
 	playerRepo := postgres.NewPlayerRepoPG(pool)
-	pb.RegisterPlayerServiceServer(s, player.NewPlayerServiceServer(playerRepo))
+	pb.RegisterPlayerServiceServer(s, player.NewPlayerServiceServer(playerRepo, cfg))
+	pb.RegisterMatchmakingServiceServer(s, queue.NewQueueService(qm))
 
 	lis, err := net.Listen("tcp", "localhost:8080")
 	if err != nil {

@@ -3,7 +3,9 @@ package player
 import (
 	"context"
 	"fmt"
+	"log"
 	pb "matchmaking/cmd/proto"
+	"matchmaking/internal/config"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -15,10 +17,11 @@ import (
 type PlayerServiceServer struct {
 	pb.UnimplementedPlayerServiceServer
 	repo PlayerRepo
+	cfg  config.Config
 }
 
-func NewPlayerServiceServer(repo PlayerRepo) *PlayerServiceServer {
-	return &PlayerServiceServer{repo: repo}
+func NewPlayerServiceServer(repo PlayerRepo, cfg config.Config) *PlayerServiceServer {
+	return &PlayerServiceServer{repo: repo, cfg: cfg}
 }
 
 func (s *PlayerServiceServer) Create(ctx context.Context, req *pb.PlayerCreateRequest) (*pb.PlayerCreateResponse, error) {
@@ -69,17 +72,16 @@ func (s *PlayerServiceServer) Login(ctx context.Context, req *pb.PlayerLoginRequ
 		return nil, status.Error(codes.InvalidArgument, "invalid credentials.")
 	}
 
-	// Move this to the .env file!
-	secret := []byte("9e7a1def-ca62-40f6-9321-7ddc0b12d033")
-
 	claims := jwt.MapClaims{
 		"sub": username,
 		"exp": time.Now().Add(1 * time.Hour).Unix(),
 		// add "iat", "iss", etc. as needed
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	secret := []byte(s.cfg.JWTSecret)
 	tokenString, err := token.SignedString(secret)
 	if err != nil {
+		log.Print(err)
 		return nil, status.Error(codes.Internal, "something went wrong. please try again.")
 	}
 

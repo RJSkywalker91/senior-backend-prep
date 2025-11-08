@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package queue;
+option go_package = "matchmaking/cmd/queue/proto;proto";
+
+message Empty {}
+
+message QueueRequest {
+  string region = 1;
+}
+
+message QueueEvent {
+  enum Type {
+    QUEUED      = 0;
+    MATCH_FOUND = 1;
+    TIMEOUT     = 2;
+    CANCELLED   = 3;
+  }
+  Type type          = 1;
+  string match_id    = 2;
+  string game_id     = 3;
+  string opponent_id = 4;
+}
+
+service MatchmakingService {
+  rpc Queue(QueueRequest) returns (stream QueueEvent);
+  rpc CancelQueue(Empty) returns (Empty);
+}
