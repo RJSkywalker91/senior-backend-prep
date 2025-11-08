@@ -1,0 +1,14 @@
+services:
+  web:
+    image: hello:dev
+    build:
+      context: ../..
+      dockerfile: build/docker/Dockerfile
+      args:
+        VERSION: "0.1.0"
+        COMMIT: "local"
+        BUILT_AT: "dev"
+    environment:
+      APP_MESSAGE: "composed and cozy"
+    ports:
+      - "8080:8080"

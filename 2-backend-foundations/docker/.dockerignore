@@ -1,0 +1,10 @@
+# .dockerignore
+.git
+.gitignore
+Dockerfile
+docker-compose.yaml
+README.md
+**/*.log
+**/*.tmp
+**/*.swp
+bin
