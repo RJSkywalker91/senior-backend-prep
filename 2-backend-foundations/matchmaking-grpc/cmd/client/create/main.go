@@ -1,0 +1,63 @@
+package main
+
+import (
+	"context"
+	"flag"
+	"fmt"
+	"log"
+	"time"
+
+	pb "matchmaking/cmd/proto"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/status"
+)
+
+func main() {
+
+	username := flag.String("username", "", "Username for the player")
+	email := flag.String("email", "", "Email address of the player")
+	password := flag.String("password", "", "Password for the player")
+	flag.Parse()
+
+	if *username == "" || *email == "" || *password == "" {
+		log.Fatalf("❗ All parameters are required.\nUsage: go run main.go -username=<name> -email=<email> -password=<pass>")
+	}
+
+	conn, err := grpc.NewClient("localhost:8080", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		log.Fatalf("Failed to connect: %v", err)
+	}
+	defer conn.Close()
+
+	client := pb.NewPlayerServiceClient(conn)
+
+	// Prepare the request
+	req := &pb.PlayerCreateRequest{
+		Username: *username,
+		Email:    *email,
+		Password: *password,
+	}
+
+	// Add a timeout to the call
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	// Call the Create RPC
+	resp, err := client.Create(ctx, req)
+	if err != nil {
+		st, _ := status.FromError(err)
+		switch st.Code() {
+		case codes.AlreadyExists:
+			fmt.Printf("❌ Username '%s' already taken", req.Username)
+		case codes.Unavailable:
+			fmt.Printf("🚫 A problem occurred. Please try again later.")
+		default:
+			fmt.Printf("⚠️ An unknown problem occurred.")
+		}
+	} else {
+		fmt.Printf("✅ Player created!\nID: %s\n", resp.Id)
+	}
+}
