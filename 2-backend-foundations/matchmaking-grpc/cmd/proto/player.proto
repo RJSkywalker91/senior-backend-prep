@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package playerservice.v1;
+
+option go_package = "matchmaking/cmd/proto;proto";
+
+
+service PlayerService {
+  rpc Create(PlayerCreateRequest) returns (PlayerCreateResponse);
+  rpc Login(PlayerLoginRequest) returns (PlayerLoginResponse);
+}
+
+// ---- Messages ----
+
+message PlayerCreateRequest {
+  string username = 1;
+  string email    = 2;
+  string password = 3;
+}
+
+message PlayerCreateResponse {
+  string id = 1;
+}
+
+message PlayerLoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message PlayerLoginResponse {
+  string token     = 1;
+  int64 expires_at = 2;
+}
